@@ -13,8 +13,9 @@ class ApiService {
 
   Future<Result<dynamic>> get(String path, Map<String, String> params) async {
     String urlString = baseURLString + path;
+    String authToken = await Config.githubAuthToken();
     final headers = {
-      'Authorization': 'token ' + Config.githubAuthToken,
+      'Authorization': 'token ' + authToken,
       'User-Agent': 'SwiftPamphletApp'
     };
     final url = Uri.parse(urlString);

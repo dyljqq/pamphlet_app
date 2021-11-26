@@ -1,7 +1,6 @@
 import '../utils/file_manager.dart';
 
 class Config {
-  static const githubAuthToken = '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';
   static const githubHost = '"https://github.com/';
 
   static Future<List> repos() async {
@@ -9,6 +8,11 @@ class Config {
     var r = await FileManager.loadDataFromFile(filename);
     var repos = r.map((e) => SimpleRepos.fromJson(e));
     return repos.toList();
+  }
+
+  static Future<String> githubAuthToken() async {
+    var r = await FileManager.loadDataFromFile('assets/data/auth_token.json');
+    return r['authToken'];
   }
 }
 
