@@ -1,3 +1,4 @@
+import 'package:pamphlet_app/config/config.dart';
 import 'package:pamphlet_app/model/repo.dart';
 
 import '../github_api/api_request.dart';
@@ -12,6 +13,7 @@ class RepoViewModel {
   Future<Result<dynamic>> getRepo(String repoName) async {
     String path = 'repos/' + repoName;
     Result result = await ApiService.instance.get(path, {});
+    await Config.repos();
     switch (result.type) {
       case ResultType.success:
         Repo repo = Repo.fromJson(result.data);

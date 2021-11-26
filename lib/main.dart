@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/repo_page.dart';
+import 'package:pamphlet_app/pages/repos_page.dart';
 
 void main() {
   runApp(const PamphletApp());
@@ -29,16 +29,6 @@ class PamphletHomePage extends StatefulWidget {
 class _PamphletHomePageState extends State<PamphletHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pamphlet app'),
-      ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(top: 10.0),
-          child: RepoPage(repoName: 'onevcat/Kingfisher'),
-        ),
-      ),
-    );
+    return const ReposPage();
   }
 }

@@ -16,24 +16,29 @@ class RepoPage extends StatefulWidget {
 class _RepoPageState extends State<RepoPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder<Result<dynamic>>(
-        future: RepoViewModel.instance.getRepo(widget.repoName),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            Result<dynamic> result = snapshot.data;
-            switch (result.type) {
-              case ResultType.success:
-                return Container(
-                    color: const Color(0XF8F8F8FF), child: page(result.data));
-              case ResultType.failure:
-                break;
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.repoName),
+        ),
+        body: Center(
+            child: FutureBuilder<Result<dynamic>>(
+          future: RepoViewModel.instance.getRepo(widget.repoName),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              Result<dynamic> result = snapshot.data;
+              switch (result.type) {
+                case ResultType.success:
+                  return Container(
+                      color: const Color(0XF8F8F8FF), child: page(result.data));
+                case ResultType.failure:
+                  break;
+              }
             }
-          }
-          return const Text('onevcat/Kingfisher');
-        },
-      ),
-    );
+            return const Center(
+              child: Text('Loading...'),
+            );
+          },
+        )));
   }
 
   Widget page(Repo repo) {

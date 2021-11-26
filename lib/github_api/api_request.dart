@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
+import 'package:pamphlet_app/config/config.dart';
 import 'result.dart';
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._();
@@ -10,17 +10,11 @@ class ApiService {
   static ApiService get instance => _instance;
 
   String baseURLString = 'https://api.github.com/';
-  String authToken = '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';
 
   Future<Result<dynamic>> get(String path, Map<String, String> params) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final r = prefs.getString('repo_name');
-    if (r != null) {
-      return Result(json.decode(r), ResultType.success);
-    }
     String urlString = baseURLString + path;
     final headers = {
-      'Authorization': 'token ' + authToken,
+      'Authorization': 'token ' + Config.githubAuthToken,
       'User-Agent': 'SwiftPamphletApp'
     };
     final url = Uri.parse(urlString);
