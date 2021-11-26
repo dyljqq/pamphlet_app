@@ -2,9 +2,9 @@ enum ResultType { success, failure }
 
 class ErrorData {
   int code;
-  String msg;
+  Map<String, dynamic> data;
 
-  ErrorData(this.code, this.msg);
+  ErrorData(this.code, this.data);
 }
 
 class Result<T> {
@@ -18,7 +18,7 @@ class Result<T> {
       case ResultType.success:
         return data;
       case ResultType.failure:
-        print("error: ${(data as ErrorData).msg}");
+        print("error: ${(data as ErrorData).data}");
         break;
     }
   }
