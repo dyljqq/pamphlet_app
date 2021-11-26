@@ -1,4 +1,5 @@
-import '../model/repo.dart';
+import 'package:pamphlet_app/model/repo.dart';
+
 import '../github_api/api_request.dart';
 import '../github_api/result.dart';
 
@@ -10,13 +11,13 @@ class RepoViewModel {
 
   Future<Result<dynamic>> getRepo(String repoName) async {
     String path = 'repos/' + repoName;
-    Map<String, dynamic> json = await ApiService.instance.get(path, {});
-    int code = json['code'];
-    if (code == 200) {
-      Repo repo = Repo.fromJson(json['data']);
-      return Result(repo, ResultType.success);
-    } else {
-      return Result(ErrorData(code, 'something wrong.'), ResultType.failure);
+    Result result = await ApiService.instance.get(path, {});
+    switch (result.type) {
+      case ResultType.success:
+        Repo repo = Repo.fromJson(result.data);
+        return Result(repo, result.type);
+      case ResultType.failure:
+        return result;
     }
   }
 }
