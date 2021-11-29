@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/config/config.dart';
+import 'package:pamphlet_app/pages/user_page.dart';
 
 class DeveloperPage extends StatefulWidget {
   const DeveloperPage({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _DeveloperPageState extends State<DeveloperPage> {
         ),
       )
     ];
-    childs.addAll(repos(dev.users));
+    childs.addAll(users(dev.users));
     return Container(
         color: Colors.white,
         margin: const EdgeInsets.only(bottom: 10),
@@ -72,7 +73,7 @@ class _DeveloperPageState extends State<DeveloperPage> {
         ));
   }
 
-  List<Widget> repos(List<DevelopeUser> users) {
+  List<Widget> users(List<DevelopeUser> users) {
     return users.map((e) {
       var child = Row(
         children: [
@@ -113,7 +114,9 @@ class _DeveloperPageState extends State<DeveloperPage> {
           child: child,
         ),
         onTap: () {
-          // TODO
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return UserPage(e.id);
+          }));
         },
       );
     }).toList();

@@ -66,6 +66,7 @@ flutter:
     - assets/data/repos.json
     - assets/data/developers.json
     - assets/data/auth_token.json
+    - images/arrows_right.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
