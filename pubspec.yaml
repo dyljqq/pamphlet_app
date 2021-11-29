@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: any
   intl: any
   path_provider: any
+  grouped_list: ^4.1.0
 
 dev_dependencies:
   flutter_test:

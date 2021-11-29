@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pamphlet_app/config/config.dart';
+import 'package:pamphlet_app/pages/developer_page.dart';
 import 'package:pamphlet_app/pages/repos_page.dart';
 
 void main() {
@@ -29,6 +31,6 @@ class PamphletHomePage extends StatefulWidget {
 class _PamphletHomePageState extends State<PamphletHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const ReposPage();
+    return const DeveloperPage();
   }
 }
