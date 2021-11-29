@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: any
   intl: any
   path_provider: any
+  grouped_list: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
     - assets/data/repos.json
     - assets/data/developers.json
     - assets/data/auth_token.json
+    - images/arrows_right.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

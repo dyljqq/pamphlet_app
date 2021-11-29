@@ -28,3 +28,7 @@ So make sure you have done this!!!!
 
 作为flutter的练手项目，以及后续会通过这个项目在手机上查看一些GitHub相关的信息。
 
+##### ps 鸣谢
+
+[GitHub - ming1016/SwiftPamphletApp: 戴铭的 Swift 小册子，一本活的 Swift 手册](https://github.com/ming1016/SwiftPamphletApp) 
+

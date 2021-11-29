@@ -14,6 +14,12 @@ class Config {
     var r = await FileManager.loadDataFromFile('assets/data/auth_token.json');
     return r['authToken'];
   }
+
+  static Future<List> developers() async {
+    String filename = 'assets/data/developers.json';
+    var r = await FileManager.loadDataFromFile(filename);
+    return r.map((e) => Developer.fromJson(e)).toList();
+  }
 }
 
 class SimpleRepos {
@@ -42,5 +48,32 @@ class SimpleRepo {
     String id = json['id'].toString();
     String des = json['des'].toString();
     return SimpleRepo(id, des);
+  }
+}
+
+class Developer {
+  String name;
+  int id;
+  List<DevelopeUser> users;
+
+  Developer(this.name, this.id, this.users);
+
+  factory Developer.fromJson(Map<String, dynamic> json) {
+    List<DevelopeUser> users = [];
+    for (var user in json['users']) {
+      users.add(DevelopeUser.fromJson(user));
+    }
+    return Developer(json['name'], json['id'], users);
+  }
+}
+
+class DevelopeUser {
+  String id;
+  String des;
+
+  DevelopeUser(this.id, this.des);
+
+  factory DevelopeUser.fromJson(Map<String, dynamic> json) {
+    return DevelopeUser(json['id'], json['des'] ?? '');
   }
 }
