@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/user.dart';
 import 'package:pamphlet_app/view_model/user_view_model.dart';
+import 'package:pamphlet_app/widgets/user_contribution_widget.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage(this.userName, {Key? key}) : super(key: key);
@@ -39,7 +41,17 @@ class _UserPageState extends State<UserPage> {
             return Container(
               color: const Color(0XF8F8F8FF),
               child: Column(
-                children: [header(result.data), listView(result.data)],
+                children: [
+                  header(result.data),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, top: 5, bottom: 5),
+                    color: Colors.white,
+                    child: userContribution(),
+                  ),
+                  listView(result.data)
+                ],
               ),
             );
           case ResultType.failure:
@@ -213,5 +225,29 @@ class _UserPageState extends State<UserPage> {
             ],
           ),
         ]));
+  }
+
+  Widget userContribution() {
+    return Container(
+      color: Colors.white,
+      child: FutureBuilder(
+        future: UserViewModel.getUserContributions(widget.userName),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            Result<dynamic> result = snapshot.data;
+            switch (result.type) {
+              case ResultType.success:
+                return UserContributionWidget(result.data);
+              case ResultType.failure:
+                break;
+            }
+          }
+          return const SizedBox(
+            width: 0,
+            height: 0,
+          );
+        },
+      ),
+    );
   }
 }
