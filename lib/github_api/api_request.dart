@@ -11,16 +11,31 @@ class ApiService {
 
   String baseURLString = 'https://api.github.com/';
 
+  Future<Map<String, String>> headers() async {
+    String authToken = await Config.githubAuthToken();
+    return {
+      'Authorization': 'token ' + authToken,
+    };
+  }
+
   Future<Result<dynamic>> get(String path, Map<String, String> params) async {
     String urlString = baseURLString + path;
-    String authToken = await Config.githubAuthToken();
-    final headers = {
-      'Authorization': 'token ' + authToken,
-      'User-Agent': 'SwiftPamphletApp'
-    };
     final url = Uri.parse(urlString);
     try {
-      final response = await http.get(url, headers: headers);
+      final response = await http.get(url, headers: await headers());
+      return _handleData(response);
+    } catch (error) {
+      print('get error: ${error.toString()}');
+      return Result(
+          ErrorData(-1, {'msg': error.toString()}), ResultType.failure);
+    }
+  }
+
+  Future<Result<dynamic>> post(String path, Map<String, dynamic> params) async {
+    final url = Uri.parse(baseURLString + path);
+    try {
+      final response = await http.post(url,
+          headers: await headers(), body: json.encode(params));
       return _handleData(response);
     } catch (error) {
       print('get error: ${error.toString()}');
