@@ -43,13 +43,7 @@ class _UserPageState extends State<UserPage> {
               child: Column(
                 children: [
                   header(result.data),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 5, bottom: 5),
-                    color: Colors.white,
-                    child: userContribution(),
-                  ),
+                  userContribution(),
                   listView(result.data)
                 ],
               ),
@@ -94,10 +88,22 @@ class _UserPageState extends State<UserPage> {
 
   Widget listView(User user) {
     List items = [
-      [Icons.group, user.company],
-      [Icons.location_on, user.location],
-      [Icons.email, user.email],
-      [Icons.link, user.blog]
+      [
+        Icons.group,
+        user.company.isEmpty ? 'Teams' : user.company,
+        user.company.isEmpty
+      ],
+      [
+        Icons.location_on,
+        user.location.isEmpty ? 'Location' : user.location,
+        user.location.isEmpty
+      ],
+      [
+        Icons.email,
+        user.email.isEmpty ? 'Email' : user.email,
+        user.email.isEmpty
+      ],
+      [Icons.link, user.blog.isEmpty ? 'Blog' : user.blog, user.blog.isEmpty]
     ];
     return Expanded(
       child: ListView.separated(
@@ -108,7 +114,7 @@ class _UserPageState extends State<UserPage> {
           return Container(
             height: 44,
             color: Colors.white,
-            child: cell(arr[0], arr[1]),
+            child: cell(arr[0], arr[1], isEmpty: arr[2]),
           );
         },
         separatorBuilder: (context, index) {
@@ -137,46 +143,49 @@ class _UserPageState extends State<UserPage> {
               image: DecorationImage(
                   image: NetworkImage(user.avatar), fit: BoxFit.cover)),
         ),
-        Container(
-          padding: const EdgeInsets.only(left: 8),
-          height: 60,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  verticalDirection: VerticalDirection.up,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 3),
-                      child: Text(
-                        user.name,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.only(left: 8),
+            height: 60,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    verticalDirection: VerticalDirection.up,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 3),
+                        child: Text(
+                          user.name,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue),
+                        ),
                       ),
-                    ),
-                    Text(
-                      '(${user.login})',
-                      style: normalTextStyle,
-                    )
-                  ],
+                      Text(
+                        '(${user.login})',
+                        style: normalTextStyle,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                user.bio,
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-              ),
-              const Spacer(),
-              Text(
-                'Joined on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(user.createdAt))}',
-                style: normalTextStyle,
-              )
-            ],
+                Text(
+                  user.bio,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 13, color: Colors.black87),
+                ),
+                const Spacer(),
+                Text(
+                  'Joined on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(user.createdAt))}',
+                  style: normalTextStyle,
+                )
+              ],
+            ),
           ),
         )
       ],
@@ -203,7 +212,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget cell(IconData icon, String title) {
+  Widget cell(IconData icon, String title, {bool isEmpty = false}) {
     return Container(
         height: 44,
         padding: const EdgeInsets.only(left: 12, right: 12),
@@ -216,7 +225,9 @@ class _UserPageState extends State<UserPage> {
                 child: Icon(icon, size: 20),
               ),
               Text(title,
-                  style: const TextStyle(color: Colors.black, fontSize: 14)),
+                  style: TextStyle(
+                      color: isEmpty ? Colors.grey : Colors.black,
+                      fontSize: 14)),
               const Spacer(),
               const Image(
                   width: 7,
@@ -228,26 +239,29 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget userContribution() {
-    return Container(
-      color: Colors.white,
-      child: FutureBuilder(
-        future: UserViewModel.getUserContributions(widget.userName),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            Result<dynamic> result = snapshot.data;
-            switch (result.type) {
-              case ResultType.success:
-                return UserContributionWidget(result.data);
-              case ResultType.failure:
-                break;
-            }
+    return FutureBuilder(
+      future: UserViewModel.getUserContributions(widget.userName),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Result<dynamic> result = snapshot.data;
+          switch (result.type) {
+            case ResultType.success:
+              return Container(
+                color: Colors.white,
+                margin: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 5, bottom: 5),
+                child: UserContributionWidget(result.data),
+              );
+            case ResultType.failure:
+              break;
           }
-          return const SizedBox(
-            width: 0,
-            height: 0,
-          );
-        },
-      ),
+        }
+        return const SizedBox(
+          width: 0,
+          height: 0,
+        );
+      },
     );
   }
 }
