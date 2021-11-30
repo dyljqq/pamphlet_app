@@ -43,10 +43,13 @@ class UserViewModel {
     Result<dynamic> result = await ApiService.instance.post(path, body);
     switch (result.type) {
       case ResultType.success:
-        var r = result.data['data']['user']['contributionsCollection']
-            ['contributionCalendar'];
-        UserContribution userContribution = UserContribution.fromJson(r);
-        return Result(userContribution, result.type);
+        if (result.data['errors'] == null) {
+          var r = result.data['data']['user']['contributionsCollection']
+              ['contributionCalendar'];
+          UserContribution userContribution = UserContribution.fromJson(r);
+          return Result(userContribution, result.type);
+        }
+        return Result(result.data, ResultType.failure);
       case ResultType.failure:
         return result;
     }
