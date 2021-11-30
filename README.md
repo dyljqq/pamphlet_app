@@ -28,6 +28,52 @@ So make sure you have done this!!!!
 
 作为flutter的练手项目，以及后续会通过这个项目在手机上查看一些GitHub相关的信息。
 
+
+
+### 接口简介
+
+* 获取用户的contribution
+
+  
+
+  - url:
+
+    https://api.github.com/graphql
+
+  - method
+
+    Post
+
+  - 参数
+
+  ```dart
+  "query": '''query {
+        user(login: "$name") {
+          name
+          contributionsCollection {
+            contributionCalendar {
+              colors
+              totalContributions
+              weeks {
+                contributionDays {
+                  color
+                  contributionCount
+                  date
+                  weekday
+                }
+                firstDay
+              }
+            }
+          }
+        }
+      }'''
+    
+    name: 表示用户的名字，比如dyljqq.
+
+具体可以参考这个链接: [UserContribution Api](https://docs.github.com/en/graphql/reference/objects#contributionscollection)
+
+
+
 ##### ps 鸣谢
 
 [GitHub - ming1016/SwiftPamphletApp: 戴铭的 Swift 小册子，一本活的 Swift 手册](https://github.com/ming1016/SwiftPamphletApp) 

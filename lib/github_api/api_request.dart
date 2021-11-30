@@ -15,7 +15,6 @@ class ApiService {
     String authToken = await Config.githubAuthToken();
     return {
       'Authorization': 'token ' + authToken,
-      'User-Agent': 'SwiftPamphletApp'
     };
   }
 
