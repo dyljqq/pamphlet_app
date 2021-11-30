@@ -144,50 +144,51 @@ class _UserPageState extends State<UserPage> {
                   image: NetworkImage(user.avatar), fit: BoxFit.cover)),
         ),
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.only(left: 8),
-            height: 60,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    verticalDirection: VerticalDirection.up,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 3),
-                        child: Text(
-                          user.name,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue),
-                        ),
+            child: Container(
+          padding: const EdgeInsets.only(left: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(bottom: 3),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 3),
+                      child: Text(
+                        user.name,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue),
                       ),
-                      Text(
-                        '(${user.login})',
-                        style: normalTextStyle,
-                      )
-                    ],
-                  ),
+                    ),
+                    Text(
+                      '(${user.login})',
+                      style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                Text(
-                  user.bio,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 13, color: Colors.black87),
-                ),
-                const Spacer(),
-                Text(
+              ),
+              Text(
+                user.bio,
+                style: const TextStyle(fontSize: 13, color: Colors.black87),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
                   'Joined on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(user.createdAt))}',
                   style: normalTextStyle,
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
-        )
+        ))
       ],
     );
   }
