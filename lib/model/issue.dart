@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Issue {
   String title;
   String body;
@@ -22,6 +24,14 @@ class IssueUser {
   }
 }
 
+class LocalIssuePage {
+  String title;
+  IconData? icon;
+  String? filename;
+
+  LocalIssuePage(this.title, {this.icon, this.filename});
+}
+
 class LocalIssueList {
   String name;
   int id;
@@ -30,7 +40,7 @@ class LocalIssueList {
   LocalIssueList(this.name, this.id, this.issues);
 
   factory LocalIssueList.fromJson(Map<String, dynamic> json) {
-    List issues = json['issues'].map((e) => LocalIssue.fromJson(e));
+    var issues = json['issues'].map((e) => LocalIssue.fromJson(e)).toList();
     return LocalIssueList(json['name'], json['id'], issues);
   }
 }

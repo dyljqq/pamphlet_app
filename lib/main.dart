@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/pages/developer_page.dart';
 import 'package:pamphlet_app/pages/issue_page.dart';
+import 'package:pamphlet_app/pages/local_issues_page.dart';
 import 'package:pamphlet_app/pages/repos_page.dart';
 
 final GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
@@ -58,8 +59,7 @@ class _PamphletHomePageState extends State<PamphletHomePage> {
           } else {
             return CupertinoTabView(
               navigatorKey: thirdTabNavKey,
-              builder: (BuildContext context) =>
-                  IssuePage('SwiftPamphletApp', 57),
+              builder: (BuildContext context) => const LocalIssuesPage(),
             );
           }
         });

@@ -26,25 +26,24 @@ class _IssuePageState extends State<IssuePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: FutureBuilder(
-          future: IssueViewModel.getIssue(widget.repoName, widget.issueNumber),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              Result<dynamic> result = snapshot.data;
-              if (result.type == ResultType.success) {
-                title = (result.data as Issue).title;
-                return page(result.data);
-              }
-            }
-            return const SizedBox();
-          },
-        ),
-      ),
+    return FutureBuilder(
+      future: IssueViewModel.getIssue(widget.repoName, widget.issueNumber),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        Widget widget = const SizedBox();
+        if (snapshot.connectionState == ConnectionState.done) {
+          Result<dynamic> result = snapshot.data;
+          if (result.type == ResultType.success) {
+            title = (result.data as Issue).title;
+            widget = page(result.data);
+          }
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(title),
+          ),
+          body: widget,
+        );
+      },
     );
   }
 
