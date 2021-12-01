@@ -39,6 +39,7 @@ dependencies:
   intl: any
   path_provider: any
   grouped_list: ^4.1.0
+  flutter_markdown: 0.6.6
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,12 @@ flutter:
     - assets/data/repos.json
     - assets/data/developers.json
     - assets/data/auth_token.json
+    - assets/data/guide_features.json
+    - assets/data/guide_subject.json
+    - assets/data/guide_syntex.json
+    - assets/data/lib_combine.json
+    - assets/data/lib_concurrency.json
+    - assets/data/lib_SwiftUI.json
     - images/arrows_right.png
 
   # To add assets to your application, add an assets section, like this:

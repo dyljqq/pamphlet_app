@@ -18,7 +18,8 @@ class ApiService {
     };
   }
 
-  Future<Result<dynamic>> get(String path, Map<String, String> params) async {
+  Future<Result<dynamic>> get(String path,
+      {Map<String, String>? params}) async {
     String urlString = baseURLString + path;
     final url = Uri.parse(urlString);
     try {
