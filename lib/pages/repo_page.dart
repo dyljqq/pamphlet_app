@@ -42,9 +42,12 @@ class _RepoPageState extends State<RepoPage> {
   }
 
   Widget page(Repo repo) {
+    var size = repo.license != null
+        ? '${repo.license?.key} * ${repo.size ~/ 1000}MB'
+        : '';
     List<CellData> data = [
-      CellData(Icons.code, repo.language,
-          '${repo.license.key} * ${repo.size ~/ 1000}MB'),
+      CellData(
+          Icons.code, repo.language.isEmpty ? 'Language' : repo.language, size),
       CellData(Icons.sync_problem, 'Issues', repo.openIssuesCount.toString()),
       CellData(Icons.assignment, 'Pull Requests', ''),
       CellData(Icons.chair_rounded, 'Branches', 'main')
@@ -177,10 +180,14 @@ class _RepoPageState extends State<RepoPage> {
           Padding(
             padding: const EdgeInsets.only(right: 5),
             child: Text(
-              desc + ' >',
+              desc,
               style: const TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ),
+          const Image(
+              image: AssetImage('images/arrows_right.png'),
+              width: 7,
+              height: 13)
         ],
       ),
     );

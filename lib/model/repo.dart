@@ -18,8 +18,7 @@ class Repo {
   int size;
 
   User user;
-  License license;
-  // List topics;
+  License? license;
 
   Repo(
       this.id,
@@ -34,17 +33,15 @@ class Repo {
       this.language,
       this.openIssuesCount,
       this.size,
-      this.user,
-      this.license);
+      this.user);
 
   factory Repo.fromJson(Map<String, dynamic> json) {
     User user = User.fromJson(json['owner']);
-    License license = License.fromJson(json['license']);
     List topics = [];
     for (var topic in json['topics']) {
       topics.add(topic);
     }
-    return Repo(
+    Repo repo = Repo(
         json['id'],
         json['name'],
         json['description'],
@@ -54,10 +51,13 @@ class Repo {
         json['stargazers_count'],
         json['watchers_count'],
         json['forks_count'],
-        json['language'],
+        json['language'] ?? '',
         json['open_issues_count'],
         json['size'],
-        user,
-        license);
+        user);
+    if (json['license'] != null) {
+      repo.license = License.fromJson(json['license']);
+    }
+    return repo;
   }
 }

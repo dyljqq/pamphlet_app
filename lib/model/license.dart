@@ -6,6 +6,6 @@ class License {
   License(this.name, this.key, this.url);
 
   factory License.fromJson(Map<String, dynamic> json) {
-    return License(json['name'], json['key'], json['url']);
+    return License(json['name'], json['key'], json['url'] ?? '');
   }
 }

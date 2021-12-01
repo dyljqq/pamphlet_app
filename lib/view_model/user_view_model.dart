@@ -6,7 +6,7 @@ import 'package:pamphlet_app/model/user_contribution.dart';
 class UserViewModel {
   static Future<Result<dynamic>> getUserInfo(String name) async {
     String path = 'users/' + name;
-    var result = await ApiService.instance.get(path, {});
+    var result = await ApiService.instance.get(path);
     switch (result.type) {
       case ResultType.success:
         User user = User.fromJson(result.data);
