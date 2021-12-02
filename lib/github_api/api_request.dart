@@ -46,7 +46,7 @@ class ApiService {
   }
 
   Result<dynamic> _handleData(http.Response response) {
-    Map<String, dynamic> result = json.decode(response.body);
+    var result = json.decode(response.body);
     if (response.statusCode == 200) {
       return Result(result, ResultType.success);
     } else {

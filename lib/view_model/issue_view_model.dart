@@ -31,6 +31,8 @@ class IssueViewModel {
           icon: Icons.timer, filename: 'guide_syntex.json'),
       LocalIssuePage('SwiftUI',
           icon: Icons.filter_list, filename: 'guide_features.json'),
+      LocalIssuePage('小册子'),
+      LocalIssuePage('小册子议题', icon: Icons.bookmark, isLocal: false)
     ];
   }
 
@@ -51,5 +53,21 @@ class IssueViewModel {
       rs.add(LocalIssueList.fromJson(item));
     }
     return rs;
+  }
+
+  static Future<List<dynamic>> issues() async {
+    String path = 'repos/ming1016/SwiftPamphletApp/issues';
+    var result = await ApiService.instance.get(path);
+    if (result.type == ResultType.success) {
+      return result.data.map((e) => Issue.fromJson(e)).toList();
+    }
+    return [];
+  }
+
+  static Future<List> issuesPageData(LocalIssuePage issuePage) async {
+    if (issuePage.isLocal != null && !issuePage.isLocal!) {
+      return issues();
+    }
+    return localIssueList(issuePage.filename ?? '');
   }
 }
