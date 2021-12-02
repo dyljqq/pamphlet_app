@@ -47,17 +47,16 @@ class _LocalIssuesPageState extends State<LocalIssuesPage> {
           );
         }
         return Container(
-            height: 30,
+            height: 44,
             padding: const EdgeInsets.only(left: 14),
             alignment: Alignment.centerLeft,
             child: issue.icon != null
                 ? GestureDetector(
                     child: cell,
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        String filename = issue.filename!;
-                        return IssuesPage(filename, issue.title);
+                      Navigator.of(context, rootNavigator: true)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return IssuesPage(issue);
                       }));
                     })
                 : cell);

@@ -106,7 +106,8 @@ class _ReposPageState extends State<ReposPage> {
           child: child,
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+          Navigator.of(context, rootNavigator: true)
+              .push(MaterialPageRoute(builder: (context) {
             return RepoPage(repoName: e.id);
           }));
         },

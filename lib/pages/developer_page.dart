@@ -114,7 +114,8 @@ class _DeveloperPageState extends State<DeveloperPage> {
           child: child,
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+          Navigator.of(context, rootNavigator: true)
+              .push(MaterialPageRoute(builder: (context) {
             return UserPage(e.id);
           }));
         },

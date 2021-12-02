@@ -51,13 +51,15 @@ class _IssuePageState extends State<IssuePage> {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.only(left: 12, top: 12),
-        child: titleSection(issue.user),
+        child: titleSection(issue),
       ),
       Expanded(child: bodySection(issue.body))
     ]);
   }
 
-  Widget titleSection(IssueUser user) {
+  Widget titleSection(Issue issue) {
+    var authorAssociation =
+        issue.authorAssociation != 'NONE' ? 'unowner' : 'owner';
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -67,14 +69,19 @@ class _IssuePageState extends State<IssuePage> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  image: NetworkImage(user.avatarUrl), fit: BoxFit.cover)),
+                  image: NetworkImage(issue.user.avatarUrl),
+                  fit: BoxFit.cover)),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5),
           child: Text(
-            user.login,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            issue.user.login,
+            style: const TextStyle(fontSize: 12),
           ),
+        ),
+        Text(
+          '($authorAssociation)',
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
         )
       ],
     );
