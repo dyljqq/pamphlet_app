@@ -24,6 +24,22 @@ static Future<String> githubAuthToken() async {
 ```
 So make sure you have done this!!!!
 
+### App展示
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/repos.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/repo.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/developers.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/developer.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/pamphlet.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/issues.png)
+
+![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/issue.png)
+
 ##### 规划
 
 作为flutter的练手项目，以及后续会通过这个项目在手机上查看一些GitHub相关的信息。
