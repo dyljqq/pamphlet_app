@@ -26,19 +26,13 @@ So make sure you have done this!!!!
 
 ### App展示
 
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/repos.png)
 
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/repo.png)
 
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/developers.png)
+| <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/repos.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/repo.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/developers.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/developer.png" width="190" height="335"/> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/pamphlet.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issues.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issue.png" width="190" height="335"/> |                                                              |
 
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/developer.png)
 
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/pamphlet.png)
-
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/issues.png)
-
-![](https://github.com/dyljqq/pamphlet_app/tree/main/pamphlet_screenshot/issue.png)
 
 ##### 规划
 
