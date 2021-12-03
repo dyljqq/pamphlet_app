@@ -28,7 +28,13 @@ class _IssuePageState extends State<IssuePage> {
         if (snapshot.connectionState == ConnectionState.done) {
           Result<dynamic> result = snapshot.data;
           if (result.type == ResultType.success) {
-            widget = page(result.data);
+            Issue issue = result.data;
+            if (issue.commentCount > 0) {
+              widget = page(result.data);
+            } else {
+              return IssueCommentPage(
+                  this.widget.repoName, issue, IssueComment.fromIssue(issue));
+            }
           }
         }
         return Scaffold(

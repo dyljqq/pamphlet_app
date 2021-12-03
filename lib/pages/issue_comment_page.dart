@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:http/http.dart';
 import 'package:pamphlet_app/model/issue.dart';
 import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
@@ -27,11 +26,13 @@ class _IssueCommentPageState extends State<IssueCommentPage> {
       body: Container(
         margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             header(widget.issue),
             Container(
               height: 40,
               padding: const EdgeInsets.only(left: 12),
+              margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(5)),
@@ -47,19 +48,10 @@ class _IssueCommentPageState extends State<IssueCommentPage> {
   }
 
   Widget header(Issue issue) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '${issue.title}#${issue.number}',
-          style: const TextStyle(
-              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        const Divider(
-          color: Colors.black12,
-          height: 2,
-        )
-      ],
+    return Text(
+      '${issue.title}#${issue.number}',
+      style: const TextStyle(
+          fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
     );
   }
 
