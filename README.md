@@ -7,6 +7,8 @@
 1. 一些基础模块的搭建
 2. github的repo页面的展示
 3. 完成repo list
+4. 完成github用户模块
+5.  repo的issue展示
 
 
 
@@ -30,7 +32,7 @@ So make sure you have done this!!!!
 
 | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/repos.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/repo.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/developers.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/developer.png" width="190" height="335"/> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/pamphlet.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issues.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issue.png" width="190" height="335"/> |                                                              |
+| <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/pamphlet.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issues.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issue.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/pamphlet_app/raw/main/pamphlet_screenshot/issueComment.png" width="190" height="335"/>                                                            |
 
 
 
