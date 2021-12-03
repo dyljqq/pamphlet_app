@@ -20,6 +20,9 @@ class ApiService {
 
   Future<Result<dynamic>> get(String path,
       {Map<String, String>? params}) async {
+    if (path.startsWith('/')) {
+      path = path.replaceFirst('/', '');
+    }
     String urlString = baseURLString + path;
     final url = Uri.parse(urlString);
     try {

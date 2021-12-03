@@ -1,20 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:pamphlet_app/model/issue_comment.dart';
 
 class Issue {
   String title;
   String body;
   int number;
+  int commentCount;
   String authorAssociation;
   String updatedAt;
+  String createdAt;
+  String commentsUrl;
+  String state;
   IssueUser user;
+  IssueCommentReaction reaction;
 
-  Issue(this.title, this.body, this.number, this.authorAssociation,
-      this.updatedAt, this.user);
+  Issue(
+      this.title,
+      this.body,
+      this.number,
+      this.commentCount,
+      this.authorAssociation,
+      this.updatedAt,
+      this.createdAt,
+      this.commentsUrl,
+      this.state,
+      this.user,
+      this.reaction);
 
   factory Issue.fromJson(Map<String, dynamic> json) {
     IssueUser user = IssueUser.fromJson(json['user']);
-    return Issue(json['title'], json['body'], json['number'],
-        json['author_association'], json['updated_at'], user);
+    IssueCommentReaction reaction =
+        IssueCommentReaction.fromJson(json['reactions']);
+    return Issue(
+        json['title'],
+        json['body'],
+        json['number'],
+        json['comments'],
+        json['author_association'],
+        json['updated_at'],
+        json['created_at'],
+        json['comments_url'],
+        json['state'],
+        user,
+        reaction);
   }
 }
 
