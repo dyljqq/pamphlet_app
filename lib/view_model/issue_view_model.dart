@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pamphlet_app/github_api/api_request.dart';
 import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/issue.dart';
+import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/utils/file_manager.dart';
 
 class IssueViewModel {
@@ -69,5 +70,15 @@ class IssueViewModel {
       return issues();
     }
     return localIssueList(issuePage.filename ?? '');
+  }
+
+  static Future<List> comments(String url) async {
+    // String path = 'repos/$loginName/$repoName/issues/$issueNumber/comments';
+    Uri uri = Uri.parse(url);
+    var result = await ApiService.instance.get(uri.path);
+    if (result.type == ResultType.success) {
+      return result.data.map((e) => IssueComment.fromJson(e)).toList();
+    }
+    return [];
   }
 }
