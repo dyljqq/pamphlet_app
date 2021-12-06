@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:pamphlet_app/model/issue.dart';
 import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
+import 'package:pamphlet_app/widgets/issue_user_header_widget.dart';
 
 class IssueCommentPage extends StatefulWidget {
   IssueCommentPage(this.repoName, this.issue, this.comment, {Key? key})
@@ -28,16 +29,11 @@ class _IssueCommentPageState extends State<IssueCommentPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            header(widget.issue),
-            Container(
-              height: 40,
-              padding: const EdgeInsets.only(left: 12),
-              margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(5)),
-              child: cellHeader(widget.comment),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: header(widget.issue),
             ),
+            IssueUserHeader(widget.comment, BorderRadius.circular(5)),
             Expanded(
               child: Markdown(data: widget.comment.body),
             )
