@@ -132,6 +132,7 @@ class _UserPageState extends State<UserPage> {
 
   Widget titleSection(User user) {
     const normalTextStyle = TextStyle(color: Colors.black87, fontSize: 12);
+    String name = user.name.isNotEmpty ? user.name : user.login;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -158,7 +159,7 @@ class _UserPageState extends State<UserPage> {
                     Padding(
                       padding: const EdgeInsets.only(right: 3),
                       child: Text(
-                        user.name,
+                        name,
                         style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -176,7 +177,7 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               Text(
-                user.bio,
+                user.bio.isNotEmpty ? user.bio : 'No Description Provided.',
                 style: const TextStyle(fontSize: 13, color: Colors.black87),
               ),
               Padding(

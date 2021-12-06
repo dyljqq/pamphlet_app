@@ -6,6 +6,7 @@ import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/pages/issue_comment_page.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
 import 'package:pamphlet_app/view_model/issue_view_model.dart';
+import 'package:pamphlet_app/widgets/issue_user_header_widget.dart';
 
 // ignore: must_be_immutable
 class IssuePage extends StatefulWidget {
@@ -120,16 +121,6 @@ class _IssuePageState extends State<IssuePage> {
     );
   }
 
-  Widget bodySection(String body) {
-    return Markdown(
-      data: body,
-      physics: const NeverScrollableScrollPhysics(),
-      onTapLink: (text, href, title) {
-        print(href);
-      },
-    );
-  }
-
   Widget header(Issue issue) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +134,7 @@ class _IssuePageState extends State<IssuePage> {
           height: 30,
           width: 70,
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          margin: const EdgeInsets.only(top: 10, bottom: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: issue.state == 'open' ? Colors.green : Colors.red),
@@ -188,15 +179,10 @@ class _IssuePageState extends State<IssuePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 40,
-            padding: const EdgeInsets.only(left: 12),
-            decoration: const BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5), topRight: Radius.circular(5))),
-            child: cellHeader(comment),
-          ),
+          IssueUserHeader(
+              comment,
+              const BorderRadius.only(
+                  topLeft: Radius.circular(5), topRight: Radius.circular(5))),
           Padding(
             padding:
                 const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
