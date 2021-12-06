@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/config/config.dart';
 import 'package:pamphlet_app/pages/repo_page.dart';
+import 'package:pamphlet_app/widgets/normal_text_cell_widget.dart';
 
 class ReposPage extends StatefulWidget {
   const ReposPage({Key? key}) : super(key: key);
@@ -67,51 +68,12 @@ class _ReposPageState extends State<ReposPage> {
 
   List<Widget> repos(List<SimpleRepo> repos) {
     return repos.map((e) {
-      var child = Row(
-        children: [
-          Text(e.id,
-              style: const TextStyle(
-                fontSize: 16,
-              ))
-        ],
-      );
-      if (e.des.isNotEmpty) {
-        child = Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(e.id,
-                    style: const TextStyle(
-                      fontSize: 16,
-                    )),
-                // const Spacer(),
-                Text(
-                  e.des,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey),
-                )
-              ],
-            )
-          ],
-        );
-      }
-      return GestureDetector(
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color:
-                  Colors.primaries[Random().nextInt(Colors.primaries.length)]),
-          child: child,
-        ),
-        onTap: () {
-          Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) {
-            return RepoPage(repoName: e.id);
-          }));
-        },
-      );
+      return NormalTextCell(e.id, description: e.des, callback: () {
+        Navigator.of(context, rootNavigator: true)
+            .push(MaterialPageRoute(builder: (context) {
+          return RepoPage(repoName: e.id);
+        }));
+      });
     }).toList();
   }
 }
