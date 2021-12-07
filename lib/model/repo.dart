@@ -44,14 +44,14 @@ class Repo {
     Repo repo = Repo(
         json['id'],
         json['name'],
-        json['description'],
+        json['description'] ?? "",
         json['full_name'],
         json['url'],
         json['updated_at'],
         json['stargazers_count'],
         json['watchers_count'],
         json['forks_count'],
-        json['language'] ?? '',
+        json['language'] ?? 'Unknown',
         json['open_issues_count'],
         json['size'],
         user);

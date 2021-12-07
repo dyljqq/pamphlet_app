@@ -2,6 +2,16 @@
 
 一个查看Github内容的小册子。
 
+### 初始化配置Github AuthToken
+
+在assets/data/ 目录下新建一个文件名叫auth_token.json。内容如下：
+
+	{
+	    "authToken": ""
+	}
+	
+authToken对应你自己的github的的值。这样项目在启动的时候，就会自动从这个文件中读取配置信息。
+
 ### 已完成的功能
 
 1. 一些基础模块的搭建
