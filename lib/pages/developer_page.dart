@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/config/config.dart';
-import 'package:pamphlet_app/pages/user_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/widgets/normal_text_cell_widget.dart';
 
 class DeveloperPage extends StatefulWidget {
@@ -80,10 +78,7 @@ class _DeveloperPageState extends State<DeveloperPage> {
         e.id,
         description: e.des,
         callback: () {
-          Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) {
-            return UserPage(e.id);
-          }));
+          PARouter.pushUser(context, e.id, rootNavigator: true);
         },
       );
     }).toList();

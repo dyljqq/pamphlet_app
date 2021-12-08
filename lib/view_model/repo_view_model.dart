@@ -1,5 +1,4 @@
 import 'package:pamphlet_app/model/repo.dart';
-import 'package:pamphlet_app/view_model/issue_view_model.dart';
 
 import '../github_api/api_request.dart';
 import '../github_api/result.dart';

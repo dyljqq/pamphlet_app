@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/issue.dart';
 import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/pages/issue_comment_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
 import 'package:pamphlet_app/view_model/issue_view_model.dart';
 import 'package:pamphlet_app/widgets/issue_user_header_widget.dart';
@@ -73,11 +73,8 @@ class _IssuePageState extends State<IssuePage> {
                     return GestureDetector(
                       child: cell(rs[index]),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return IssueCommentPage(
-                              widget.repoName, issue, rs[index]);
-                        }));
+                        PARouter.pushIssueComment(
+                            context, widget.repoName, issue, rs[index]);
                       },
                     );
                   },

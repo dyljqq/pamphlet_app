@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/user.dart';
-import 'package:pamphlet_app/pages/repo_list_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/view_model/user_view_model.dart';
 import 'package:pamphlet_app/widgets/user_contribution_widget.dart';
 
@@ -75,10 +75,7 @@ class _UserPageState extends State<UserPage> {
                 child: GestureDetector(
                   child: userCount('Repositories', user.publicReposCount),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return RepoListPage(user.login);
-                    }));
+                    PARouter.pushRepoList(context, user.login);
                   },
                 ),
               ),

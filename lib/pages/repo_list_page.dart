@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pamphlet_app/model/repo.dart';
-import 'package:pamphlet_app/utils/color_utils.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/view_model/repo_view_model.dart';
 
 class RepoListPage extends StatefulWidget {
@@ -31,7 +31,12 @@ class _RepoListPageState extends State<RepoListPage> {
               itemCount: repos.length,
               itemBuilder: (BuildContext context, int index) {
                 Repo repo = repos[index];
-                return cell(repo);
+                return GestureDetector(
+                  child: cell(repo),
+                  onTap: () {
+                    PARouter.pushRepo(context, repo.fullName);
+                  },
+                );
               },
             );
           }
@@ -66,34 +71,32 @@ class _RepoListPageState extends State<RepoListPage> {
 
   Widget info(Repo repo) {
     return Expanded(
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              repo.fullName,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.blue,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            repo.fullName,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.blue,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                repo.description,
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              repo.description,
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
             ),
-            Text(
-              'Updated on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(repo.updatedAt))}',
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: cellFooter(repo),
-            )
-          ],
-        ),
+          ),
+          Text(
+            'Updated on ${DateFormat('yyyy-MM-dd').format(DateTime.parse(repo.updatedAt))}',
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: cellFooter(repo),
+          )
+        ],
       ),
     );
   }
