@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pamphlet_app/model/issue.dart';
-import 'package:pamphlet_app/pages/issue_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/view_model/issue_view_model.dart';
 
 class IssuesPage extends StatefulWidget {
@@ -33,11 +33,8 @@ class _IssuesPageState extends State<IssuesPage> {
                   return GestureDetector(
                     child: cell(items[index]),
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return IssuePage(
-                            'SwiftPamphletApp', items[index].number);
-                      }));
+                      PARouter.pushIssue(
+                          context, 'SwiftPamphletApp', items[index].number);
                     },
                   );
                 } else {
@@ -104,9 +101,8 @@ class _IssuesPageState extends State<IssuesPage> {
           ),
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return IssuePage('SwiftPamphletApp', (e as LocalIssue).number);
-          }));
+          PARouter.pushIssue(
+              context, 'SwiftPamphletApp', (e as LocalIssue).number);
         },
       );
     }).toList();

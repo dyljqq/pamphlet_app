@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/config/config.dart';
-import 'package:pamphlet_app/pages/repo_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/widgets/normal_text_cell_widget.dart';
 
 class ReposPage extends StatefulWidget {
@@ -69,10 +67,7 @@ class _ReposPageState extends State<ReposPage> {
   List<Widget> repos(List<SimpleRepo> repos) {
     return repos.map((e) {
       return NormalTextCell(e.id, description: e.des, callback: () {
-        Navigator.of(context, rootNavigator: true)
-            .push(MaterialPageRoute(builder: (context) {
-          return RepoPage(repoName: e.id);
-        }));
+        PARouter.pushRepo(context, e.id, rootNavigator: true);
       });
     }).toList();
   }

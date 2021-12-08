@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/model/issue.dart';
-import 'package:pamphlet_app/pages/issues_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/view_model/issue_view_model.dart';
 
 class LocalIssuesPage extends StatefulWidget {
@@ -54,10 +54,7 @@ class _LocalIssuesPageState extends State<LocalIssuesPage> {
                 ? GestureDetector(
                     child: cell,
                     onTap: () {
-                      Navigator.of(context, rootNavigator: true)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return IssuesPage(issue);
-                      }));
+                      PARouter.pushIssues(context, issue, true);
                     })
                 : cell);
       },

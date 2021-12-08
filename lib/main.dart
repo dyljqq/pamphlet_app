@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/pages/developer_page.dart';
-import 'package:pamphlet_app/pages/issue_page.dart';
 import 'package:pamphlet_app/pages/local_issues_page.dart';
 import 'package:pamphlet_app/pages/repos_page.dart';
 

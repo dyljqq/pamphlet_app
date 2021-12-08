@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/repo.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import '../view_model/repo_view_model.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
 
@@ -105,13 +106,18 @@ class _RepoPageState extends State<RepoPage> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(
-                  image: NetworkImage(repo.user.avatar), fit: BoxFit.cover)),
+        GestureDetector(
+          child: Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                image: DecorationImage(
+                    image: NetworkImage(repo.user.avatar), fit: BoxFit.cover)),
+          ),
+          onTap: () {
+            PARouter.pushUser(context, repo.user.login);
+          },
         ),
         Expanded(
             child: Container(

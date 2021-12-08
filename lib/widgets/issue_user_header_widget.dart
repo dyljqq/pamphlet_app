@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/model/issue_comment.dart';
-import 'package:pamphlet_app/pages/user_page.dart';
+import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/utils/time_convert.dart';
 
 class IssueUserHeader extends StatefulWidget {
@@ -57,9 +57,7 @@ class _IssueUserHeaderState extends State<IssueUserHeader> {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return UserPage(login);
-        }));
+        PARouter.pushUser(context, login);
       },
     );
   }
