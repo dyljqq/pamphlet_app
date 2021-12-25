@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pamphlet_app/pages/developer_page.dart';
 import 'package:pamphlet_app/pages/local_issues_page.dart';
 import 'package:pamphlet_app/pages/repos_page.dart';
+import 'package:pamphlet_app/utils/resource_manager.dart';
 
 final GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
