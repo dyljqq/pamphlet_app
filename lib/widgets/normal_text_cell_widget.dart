@@ -30,31 +30,36 @@ class _NormalTextCellState extends State<NormalTextCell> {
     if (widget.description != null && widget.description!.isNotEmpty) {
       child = Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.text,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  )),
-              Text(
-                widget.description!,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              )
-            ],
-          )
+          Expanded(
+              child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.text,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    )),
+                Text(
+                  widget.description!,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                )
+              ],
+            ),
+          ))
         ],
       );
     }
     return GestureDetector(
       child: Container(
-        padding: const EdgeInsets.all(5),
-        margin: const EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.primaries[Random().nextInt(Colors.primaries.length)]),
-        child: child,
-      ),
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color:
+                  Colors.primaries[Random().nextInt(Colors.primaries.length)]),
+          child: child),
       onTap: widget.callback,
     );
   }

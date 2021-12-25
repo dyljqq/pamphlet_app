@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamphlet_app/config/config.dart';
+import 'package:pamphlet_app/utils/resource_manager.dart';
 import 'package:pamphlet_app/utils/route.dart';
 import 'package:pamphlet_app/widgets/normal_text_cell_widget.dart';
 
@@ -19,7 +20,7 @@ class _ReposPageState extends State<ReposPage> {
       ),
       body: Center(
           child: FutureBuilder(
-        future: Config.repos(),
+        future: ResourceManager.instance.getRepos(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             var repos = snapshot.data;

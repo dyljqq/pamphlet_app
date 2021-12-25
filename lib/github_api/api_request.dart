@@ -24,6 +24,11 @@ class ApiService {
       path = path.replaceFirst('/', '');
     }
     String urlString = baseURLString + path;
+    return getByUrl(urlString);
+  }
+
+  Future<Result<dynamic>> getByUrl(String urlString,
+      {Map<String, String>? params}) async {
     final url = Uri.parse(urlString);
     try {
       final response = await http.get(url, headers: await headers());
