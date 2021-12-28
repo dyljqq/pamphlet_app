@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:pamphlet_app/config/config.dart';
 import 'package:pamphlet_app/github_api/api_request.dart';
 import 'package:pamphlet_app/github_api/result.dart';
+import 'package:pamphlet_app/model/issue.dart';
 import 'package:pamphlet_app/model/repo_content.dart';
 
 class ResourceManager {
@@ -11,10 +12,8 @@ class ResourceManager {
 
   static ResourceManager get instance => _instance;
 
-  Map<String, RepoContent> resourceMapping = {};
-
-  Future<List<RepoContent>> getResources() async {
-    resourceMapping = {};
+  Future<Map<String, RepoContent>> getResourceMapping() async {
+    Map<String, RepoContent> resourceMapping = {};
     String path =
         'repos/ming1016/SwiftPamphletApp/contents/SwiftPamphletApp/Resource';
     Result r = await ApiService.instance.get(path);
@@ -25,43 +24,40 @@ class ResourceManager {
           resourceMapping[content.filename] = content;
         }
       }
-      return resourceMapping.values.toList();
+      return resourceMapping;
     }
-    return [];
+    return {};
   }
 
   Future<List> getRepos() async {
-    if (resourceMapping.isEmpty) {
-      await getResources();
-    }
-    var repoContent = resourceMapping['goodrepos']!;
-    var result = await ApiService.instance.getByUrl(repoContent.url);
-    if (result.type == ResultType.success) {
-      RepoContent content = RepoContent.fromJson(result.data);
-      var rs = json.decode(content.content);
-      return rs.map((e) => SimpleRepos.fromJson(e)).toList();
-    }
-    return [];
+    List rs = await getData('goodrepos');
+    return rs.map((e) => SimpleRepos.fromJson(e)).toList();
   }
 
   Future<List> getDevelopers() async {
-    if (resourceMapping.isEmpty) {
-      await getResources();
-    }
+    List rs = await getData('developers');
+    rs.add({
+      'name': '原作者',
+      'id': 1234,
+      'users': [
+        {"id": "dyljqq", "des": "repo owner"}
+      ]
+    });
+    return rs.map((e) => Developer.fromJson(e)).toList();
+  }
 
-    var developerContent = resourceMapping['developers']!;
-    var result = await ApiService.instance.getByUrl(developerContent.url);
+  Future<List> getResources(String name) async {
+    List rs = await getData(name);
+    return rs.map((e) => LocalIssueList.fromJson(e)).toList();
+  }
+
+  Future<List> getData(String name) async {
+    Map<String, RepoContent> resourceMapping = await getResourceMapping();
+    RepoContent repoContent = resourceMapping[name]!;
+    var result = await ApiService.instance.getByUrl(repoContent.url);
     if (result.type == ResultType.success) {
       RepoContent content = RepoContent.fromJson(result.data);
-      List rs = json.decode(content.content);
-      rs.add({
-        'name': '原作者',
-        'id': 1234,
-        'users': [
-          {"id": "dyljqq", "des": "repo owner"}
-        ]
-      });
-      return rs.map((e) => Developer.fromJson(e)).toList();
+      return json.decode(content.content);
     }
     return [];
   }
