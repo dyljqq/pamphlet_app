@@ -4,6 +4,7 @@ import 'package:pamphlet_app/github_api/result.dart';
 import 'package:pamphlet_app/model/issue.dart';
 import 'package:pamphlet_app/model/issue_comment.dart';
 import 'package:pamphlet_app/utils/file_manager.dart';
+import 'package:pamphlet_app/utils/resource_manager.dart';
 
 class IssueViewModel {
   static List<String> get filenames {
@@ -21,17 +22,30 @@ class IssueViewModel {
     return [
       LocalIssuePage('Swift指南'),
       LocalIssuePage('语法速查',
-          icon: Icons.functions, filename: 'guide_syntex.json'),
-      LocalIssuePage('特性', icon: Icons.person, filename: 'guide_syntex.json'),
+          icon: Icons.functions,
+          filename: 'guide_syntex.json',
+          resourceName: 'guide-syntax'),
+      LocalIssuePage('特性',
+          icon: Icons.person,
+          filename: 'guide_features.json',
+          resourceName: 'guide-features'),
       LocalIssuePage('专题',
-          icon: Icons.campaign, filename: 'guide_features.json'),
+          icon: Icons.campaign,
+          filename: 'guide_subject.json',
+          resourceName: 'guide-subject'),
       LocalIssuePage('库使用指南'),
       LocalIssuePage('Combine',
-          icon: Icons.connect_without_contact, filename: 'guide_syntex.json'),
+          icon: Icons.connect_without_contact,
+          filename: 'lib_combine.json',
+          resourceName: 'lib-Combine'),
       LocalIssuePage('Concurrency',
-          icon: Icons.timer, filename: 'guide_syntex.json'),
+          icon: Icons.timer,
+          filename: 'lib_concurrency.json',
+          resourceName: 'lib-Concurrency'),
       LocalIssuePage('SwiftUI',
-          icon: Icons.filter_list, filename: 'guide_features.json'),
+          icon: Icons.filter_list,
+          filename: 'lib_SwiftUI.json',
+          resourceName: 'lib-SwiftUI'),
       LocalIssuePage('小册子'),
       LocalIssuePage('小册子议题', icon: Icons.bookmark, isLocal: false)
     ];
@@ -69,11 +83,22 @@ class IssueViewModel {
     if (issuePage.isLocal != null && !issuePage.isLocal!) {
       return issues();
     }
-    return localIssueList(issuePage.filename ?? '');
+    List resources = [];
+    if (issuePage.resourceName != null &&
+        issuePage.resourceName != 'guide-syntax') {
+      resources = await getResources(issuePage.resourceName!);
+    }
+    if (resources.isEmpty) {
+      resources = await localIssueList(issuePage.filename ?? '');
+    }
+    return resources;
+  }
+
+  static Future<List> getResources(String resourceName) async {
+    return ResourceManager.instance.getResources(resourceName);
   }
 
   static Future<List> comments(String url) async {
-    // String path = 'repos/$loginName/$repoName/issues/$issueNumber/comments';
     Uri uri = Uri.parse(url);
     var result = await ApiService.instance.get(uri.path);
     if (result.type == ResultType.success) {

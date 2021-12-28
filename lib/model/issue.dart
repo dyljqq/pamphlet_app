@@ -62,8 +62,10 @@ class LocalIssuePage {
   IconData? icon;
   String? filename;
   bool? isLocal;
+  String? resourceName;
 
-  LocalIssuePage(this.title, {this.icon, this.filename, this.isLocal});
+  LocalIssuePage(this.title,
+      {this.icon, this.filename, this.isLocal, this.resourceName});
 }
 
 class LocalIssueList {
