@@ -13,9 +13,21 @@ class ResourceManager {
   static ResourceManager get instance => _instance;
 
   Future<Map<String, RepoContent>> getResourceMapping() async {
+    var names = ['Guide', 'News'];
+    Map<String, RepoContent> resourceMapping = {};
+    for (var name in names) {
+      Map<String, RepoContent> rm = await _getResourceMappingByName(name);
+      rm.forEach((key, value) {
+        resourceMapping[key] = value;
+      });
+    }
+    return resourceMapping;
+  }
+
+  Future<Map<String, RepoContent>> _getResourceMappingByName(String name) async {
     Map<String, RepoContent> resourceMapping = {};
     String path =
-        'repos/ming1016/SwiftPamphletApp/contents/SwiftPamphletApp/Resource';
+        'repos/ming1016/SwiftPamphletApp/contents/SwiftPamphletApp/Resource/$name';
     Result r = await ApiService.instance.get(path);
     if (r.type == ResultType.success) {
       for (var d in r.data) {
